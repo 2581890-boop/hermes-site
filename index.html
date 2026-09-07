@@ -1,27 +1,184 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hermes 김비서입니다.</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="기후정원연구소 - 기후위기 대응형 정원·조경·친환경 기술 및 제품 연구개발" />
+  <title>기후정원연구소 | Climate Garden Lab</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Hermes 김비서입니다.</h1>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home">
+        <span class="brand-mark">CGL</span>
+        <span>
+          <strong>기후정원연구소</strong>
+          <small>Climate Garden Lab</small>
+        </span>
+      </a>
+      <button class="menu-button" aria-label="메뉴 열기">☰</button>
+      <nav class="nav">
+        <a href="#about">연구소 소개</a>
+        <a href="#business">사업분야</a>
+        <a href="#products">제품</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#contact">문의</a>
+      </nav>
+    </div>
+  </header>
 
-  <p>안녕하세요. 저는 Haki의 개인비서 "김비서" AI Assistant입니다.</p>
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">CLIMATE ADAPTATION · NATURE-BASED SOLUTIONS</p>
+          <h1>기후위기에 대응하는<br />정원과 도시의 새로운 해법</h1>
+          <p class="hero-copy">
+            기후정원연구소는 기후적응, 자연기반해법(NbS), 친환경 조경기술을 바탕으로
+            지속가능한 공간과 제품을 연구하고 실제 사업으로 연결합니다.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#business">사업분야 보기</a>
+            <a class="button secondary" href="#contact">협업 문의</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-orb"></div>
+          <div class="hero-stats">
+            <div><strong>Climate</strong><span>기후적응</span></div>
+            <div><strong>Garden</strong><span>정원·조경</span></div>
+            <div><strong>Lab</strong><span>연구개발</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <p>
-    사용자의 요청에 따라 Google Calendar, Gmail, Tasks 등
-    Google 서비스를 연동하여 개인 업무와 일정 관리를 지원합니다.
-  </p>
+    <section id="about" class="section">
+      <div class="container two-col">
+        <div>
+          <p class="section-label">ABOUT</p>
+          <h2>자연과 기술을 연결하는<br />기후정원 전문 연구조직</h2>
+        </div>
+        <div class="prose">
+          <p>
+            기후정원연구소는 기후변화 대응 친환경 제품, 도시열섬 저감, 물순환,
+            생태기반 공간계획, 스마트 조경관리 기술을 연구합니다.
+          </p>
+          <p>
+            연구 결과를 지자체·공공기관·민간사업자의 실제 프로젝트에 적용할 수 있도록
+            제품개발, 현장실증, 설계, 사업제안까지 통합적으로 지원합니다.
+          </p>
+        </div>
+      </div>
+    </section>
 
-  <p>
-    본 서비스는 개인적인 용도로 운영됩니다.
-  </p>
+    <section id="business" class="section alt">
+      <div class="container">
+        <p class="section-label">BUSINESS</p>
+        <h2>핵심 사업분야</h2>
+        <div class="cards four">
+          <article class="card">
+            <span class="num">01</span>
+            <h3>기후적응형 정원</h3>
+            <p>폭염, 가뭄, 집중호우에 대응하는 기후회복력 정원 및 공공공간 모델을 개발합니다.</p>
+          </article>
+          <article class="card">
+            <span class="num">02</span>
+            <h3>자연기반해법</h3>
+            <p>NbS를 활용해 생태복원, 탄소저감, 물순환, 생물다양성을 동시에 고려합니다.</p>
+          </article>
+          <article class="card">
+            <span class="num">03</span>
+            <h3>친환경 제품개발</h3>
+            <p>투수포장, 배수, 쿨링미스트 등 기후대응형 조경·환경 제품을 기획하고 실증합니다.</p>
+          </article>
+          <article class="card">
+            <span class="num">04</span>
+            <h3>스마트 유지관리</h3>
+            <p>GIS, 센서, 데이터 기반 모니터링을 활용해 유지관리 효율을 높입니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <p>
-    <a href="privacy.html">개인정보처리방침</a>
-    <a href="terms.html">서비스 약관</a>
-  </p>
+    <section id="products" class="section">
+      <div class="container">
+        <p class="section-label">PRODUCTS</p>
+        <h2>주요 제품 및 솔루션</h2>
+        <div class="cards three">
+          <article class="product">
+            <div class="product-thumb thumb-a"></div>
+            <div class="product-body">
+              <p class="tag">PERMEABLE PAVING</p>
+              <h3>FREEFIX</h3>
+              <p>픽셀형 조립식 투수 포장 시스템. 공공공간과 정원에 유연하게 적용할 수 있습니다.</p>
+            </div>
+          </article>
+          <article class="product">
+            <div class="product-thumb thumb-b"></div>
+            <div class="product-body">
+              <p class="tag">DRAINAGE</p>
+              <h3>MEGAFLO</h3>
+              <p>조경 및 도시공간의 배수·물순환 성능을 강화하는 배수 솔루션입니다.</p>
+            </div>
+          </article>
+          <article class="product">
+            <div class="product-thumb thumb-c"></div>
+            <div class="product-body">
+              <p class="tag">COOLING SYSTEM</p>
+              <h3>Cooling Mist</h3>
+              <p>폭염 저감과 체감온도 개선을 위한 폴라드·폴·아치·디자인형 미스트 시스템입니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section dark">
+      <div class="container">
+        <p class="section-label">PROJECTS</p>
+        <h2>연구에서 현장까지</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span>01</span>
+            <div><h3>기후회복력 정원 모델</h3><p>지자체 대상 기후위기 적응형 정원 및 도시공간 시범사업 기획</p></div>
+          </div>
+          <div class="timeline-item">
+            <span>02</span>
+            <div><h3>친환경 조경 R&D</h3><p>투수·배수·토양·쿨링 기술의 제품화 및 현장 실증</p></div>
+          </div>
+          <div class="timeline-item">
+            <span>03</span>
+            <div><h3>디지털 기반 유지관리</h3><p>GIS·디지털트윈·현장데이터 기반의 관리체계 구축</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact-box">
+        <div>
+          <p class="section-label">CONTACT</p>
+          <h2>프로젝트와 협업을<br />함께 시작하세요.</h2>
+        </div>
+        <div class="contact-info">
+          <p><strong>기후정원연구소 | Climate Garden Lab</strong></p>
+          <p>기후적응 · 친환경 조경 · 제품 R&D · 공공사업 제안</p>
+          <p class="muted">이메일, 전화번호, 주소는 실제 정보로 교체해 사용하세요.</p>
+          <a class="button primary" href="mailto:your-email@example.com">이메일 문의</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> Climate Garden Lab. All rights reserved.</p>
+      <a href="#home">TOP ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
