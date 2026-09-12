@@ -25,6 +25,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="js/dc-runtime.js" defer></script>
+
+<style id="content-protection">
+  /* Basic deterrence against casual copying/saving. */
+  html, body, body * {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  img, svg {
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none;
+  }
+  a, button, input, textarea, select {
+    -webkit-user-select: auto;
+    user-select: auto;
+  }
+</style>
+
 </head>
 <body>
 <x-dc>
@@ -520,5 +538,24 @@ class Component extends DCLogic {
 }
 </script>
 
+
+
+<script id="content-protection-script">
+document.addEventListener('contextmenu', function (e) {
+  e.preventDefault();
+});
+document.addEventListener('dragstart', function (e) {
+  if (e.target && (e.target.tagName === 'IMG' || e.target.tagName === 'SVG')) {
+    e.preventDefault();
+  }
+});
+document.addEventListener('copy', function (e) {
+  var tag = (e.target && e.target.tagName) || '';
+  if (!/^(INPUT|TEXTAREA)$/.test(tag)) e.preventDefault();
+});
+document.querySelectorAll('img').forEach(function(img) {
+  img.setAttribute('draggable', 'false');
+});
+</script>
 
 </body></html>
