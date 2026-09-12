@@ -27,19 +27,25 @@
 <script src="js/dc-runtime.js" defer></script>
 
 <style id="content-protection">
-  /* Basic deterrence against casual copying/saving. */
+  /* iPhone/iPad Safari + desktop: casual copy/save deterrence */
   html, body, body * {
-    -webkit-user-select: none;
-    user-select: none;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
   }
-  img, svg {
-    -webkit-user-drag: none;
-    user-drag: none;
-    -webkit-touch-callout: none;
+  img, svg, picture, canvas {
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+    -webkit-touch-callout: none !important;
+    pointer-events: none !important;
   }
+  /* Keep controls usable */
   a, button, input, textarea, select {
-    -webkit-user-select: auto;
-    user-select: auto;
+    -webkit-touch-callout: none !important;
+  }
+  input, textarea {
+    -webkit-user-select: text !important;
+    user-select: text !important;
   }
 </style>
 
@@ -541,21 +547,40 @@ class Component extends DCLogic {
 
 
 <script id="content-protection-script">
-document.addEventListener('contextmenu', function (e) {
-  e.preventDefault();
-});
-document.addEventListener('dragstart', function (e) {
-  if (e.target && (e.target.tagName === 'IMG' || e.target.tagName === 'SVG')) {
-    e.preventDefault();
+(function () {
+  function block(e) { e.preventDefault(); return false; }
+
+  document.addEventListener('contextmenu', block, {capture:true});
+  document.addEventListener('copy', function(e) {
+    var t = e.target && e.target.tagName;
+    if (t !== 'INPUT' && t !== 'TEXTAREA') block(e);
+  }, {capture:true});
+  document.addEventListener('cut', function(e) {
+    var t = e.target && e.target.tagName;
+    if (t !== 'INPUT' && t !== 'TEXTAREA') block(e);
+  }, {capture:true});
+  document.addEventListener('dragstart', block, {capture:true});
+  document.addEventListener('selectstart', function(e) {
+    var t = e.target && e.target.tagName;
+    if (t !== 'INPUT' && t !== 'TEXTAREA') block(e);
+  }, {capture:true});
+
+  function lockMedia() {
+    document.querySelectorAll('img,svg,picture,canvas').forEach(function(el) {
+      el.setAttribute('draggable','false');
+      el.style.setProperty('-webkit-touch-callout','none','important');
+      el.style.setProperty('-webkit-user-select','none','important');
+      el.style.setProperty('user-select','none','important');
+      el.style.setProperty('pointer-events','none','important');
+    });
   }
-});
-document.addEventListener('copy', function (e) {
-  var tag = (e.target && e.target.tagName) || '';
-  if (!/^(INPUT|TEXTAREA)$/.test(tag)) e.preventDefault();
-});
-document.querySelectorAll('img').forEach(function(img) {
-  img.setAttribute('draggable', 'false');
-});
+  lockMedia();
+
+  /* Claude/React can render images after load, so protect newly inserted media too. */
+  new MutationObserver(lockMedia).observe(document.documentElement, {
+    childList:true, subtree:true
+  });
+})();
 </script>
 
 </body></html>
