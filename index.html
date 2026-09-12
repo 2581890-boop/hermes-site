@@ -24,6 +24,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="js/bundle_01.js"></script>
 <link rel="stylesheet" href="css/style.css">
+
+<style id="lsd-content-protection">
+/* Casual-copy deterrence for desktop + iPhone/iPad Safari */
+html, body, body * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+img, picture, svg, canvas {
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  pointer-events: none !important;
+}
+/* Preserve normal operation of form controls */
+input, textarea {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  pointer-events: auto !important;
+}
+button, a, select, label {
+  pointer-events: auto !important;
+}
+</style>
+
 </head>
 <body>
 <x-dc>
@@ -783,5 +810,71 @@ class Component extends DCLogic {
 }
 </script>
 
+
+
+<script id="lsd-content-protection-script">
+(function () {
+  function stop(e) {
+    e.preventDefault();
+    return false;
+  }
+
+  document.addEventListener('contextmenu', stop, {capture:true});
+  document.addEventListener('dragstart', stop, {capture:true});
+
+  document.addEventListener('copy', function (e) {
+    var t = e.target && e.target.tagName;
+    if (t !== 'INPUT' && t !== 'TEXTAREA') stop(e);
+  }, {capture:true});
+
+  document.addEventListener('cut', function (e) {
+    var t = e.target && e.target.tagName;
+    if (t !== 'INPUT' && t !== 'TEXTAREA') stop(e);
+  }, {capture:true});
+
+  document.addEventListener('selectstart', function (e) {
+    var t = e.target && e.target.tagName;
+    if (t !== 'INPUT' && t !== 'TEXTAREA') stop(e);
+  }, {capture:true});
+
+  function protectMedia(root) {
+    (root || document).querySelectorAll('img, picture, svg, canvas').forEach(function (el) {
+      el.setAttribute('draggable', 'false');
+      el.style.setProperty('-webkit-touch-callout', 'none', 'important');
+      el.style.setProperty('-webkit-user-select', 'none', 'important');
+      el.style.setProperty('user-select', 'none', 'important');
+      el.style.setProperty('pointer-events', 'none', 'important');
+    });
+  }
+
+  function startProtection() {
+    protectMedia(document);
+
+    /* Claude/React may insert media after initial page load. */
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (node) {
+          if (node.nodeType !== 1) return;
+          if (node.matches && node.matches('img, picture, svg, canvas')) {
+            node.setAttribute('draggable', 'false');
+            node.style.setProperty('-webkit-touch-callout', 'none', 'important');
+            node.style.setProperty('-webkit-user-select', 'none', 'important');
+            node.style.setProperty('user-select', 'none', 'important');
+            node.style.setProperty('pointer-events', 'none', 'important');
+          }
+          if (node.querySelectorAll) protectMedia(node);
+        });
+      });
+    });
+    observer.observe(document.documentElement, {childList:true, subtree:true});
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startProtection);
+  } else {
+    startProtection();
+  }
+})();
+</script>
 
 </body></html>
